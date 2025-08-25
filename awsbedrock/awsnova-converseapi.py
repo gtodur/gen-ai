@@ -6,10 +6,10 @@ import json
 
 session = boto3.Session(profile_name='gen-ai')
 client = boto3.client("bedrock-runtime")
-model_id = 'apac.amazon.nova-micro-v1:0'
+model_id = 'arn:aws:bedrock:ap-south-1:904368995177:inference-profile/apac.amazon.nova-micro-v1:0'
 
 # Start a conversation with the user message.
-user_message = "What is spring boot framework in less than 100 words."
+user_message = "List the 5 largest companies in the world and their market value."
 conversation = [
     {
         "role": "user",
@@ -24,7 +24,7 @@ try:
     response = client.converse(
         modelId=model_id,
         messages=conversation,
-        inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+        inferenceConfig={"maxTokens": 50, "temperature": 0.5, "topP": 0.9},
     )
 
     # Extract and print the response text.
